@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Calculadora Dólar BCV - Pago Móvil Mototaxis</title>
+    <title>Panaxstreaming TV Go - Pago Móvil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -20,12 +20,11 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #0c1b5a 0%, #1a3a8f 100%);
             padding: 20px;
-            position: relative;
         }
         
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             background-color: rgba(255, 255, 255, 0.97);
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
@@ -35,646 +34,357 @@
         .header {
             background: linear-gradient(to right, #0c1b5a, #1a3a8f);
             color: white;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
+        }
+        
+        .header-image {
+            width: 100%;
+            max-height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
         .header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
+            line-height: 1.3;
         }
         
-        .header p {
-            opacity: 0.9;
-            font-size: 0.95rem;
+        .header .subtitle {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .content {
-            padding: 30px;
+            padding: 20px;
         }
         
-        /* Sección principal del botón de compras (lo primero que se ve) */
         .main-action-section {
             background: linear-gradient(135deg, #fff9e6, #fff0d4);
-            border-radius: 20px;
-            padding: 30px 25px;
-            margin-bottom: 30px;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
             text-align: center;
             border: 2px solid #f39c12;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         
         .main-action-icon {
-            font-size: 4rem;
+            font-size: 3rem;
             color: #e67e22;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             animation: pulse 2s infinite;
         }
         
         .main-action-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: #e67e22;
-            margin-bottom: 10px;
-        }
-        
-        .main-action-subtitle {
-            color: #555;
-            margin-bottom: 25px;
-            font-size: 1rem;
+            margin-bottom: 5px;
         }
         
         .btn-panax-main {
             background: linear-gradient(to right, #e67e22, #f39c12);
             color: white;
             border: none;
-            padding: 20px 35px;
-            font-size: 1.5rem;
+            padding: 14px 25px;
+            font-size: 1.2rem;
             font-weight: 700;
-            border-radius: 60px;
+            border-radius: 50px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
+            gap: 12px;
             width: 100%;
-            max-width: 320px;
+            max-width: 280px;
             text-decoration: none;
-        }
-        
-        .btn-panax-main:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(230, 126, 34, 0.5);
-            background: linear-gradient(to right, #f39c12, #e67e22);
-        }
-        
-        .btn-panax-main:active {
-            transform: translateY(0);
         }
         
         .info-box {
             background-color: #f8f9fa;
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-left: 5px solid #1a3a8f;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a3a8f;
         }
         
         .info-box h3 {
             color: #1a3a8f;
-            margin-bottom: 10px;
-            display: flex;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .plans-section {
+            background: linear-gradient(135deg, #e8f0fe, #d4e2fc);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 2px solid #1a3a8f;
+        }
+        
+        .plans-title {
+            color: #1a3a8f;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .plan-select {
+            width: 100%;
+            padding: 12px;
+            font-size: 0.9rem;
+            border: 2px solid #c2d9ff;
+            border-radius: 10px;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        .client-form-section {
+            background-color: #f1f8ff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 2px solid #c2d9ff;
+        }
+        
+        .client-form-title {
+            color: #1a3a8f;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            border: 2px solid #c2d9ff;
+            border-radius: 8px;
+            background-color: white;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #1a3a8f;
+        }
+        
+        .payment-summary {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 2px solid #4caf50;
+            text-align: center;
+        }
+        
+        .payment-summary-title {
+            color: #2e7d32;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .payment-amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1a3a8f;
+            margin: 10px 0;
+        }
+        
+        .copy-amount-btn {
+            background: linear-gradient(to right, #0c7b3a, #0a9e4a);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
         }
         
-        .info-box p {
-            color: #555;
-            line-height: 1.5;
-            font-size: 0.95rem;
+        .bank-data-section {
+            background-color: #fff8e1;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc107;
         }
         
-        .btn-container {
+        .bank-title {
+            color: #e67e22;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 20px;
+        }
+        
+        .bank-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .bank-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .bank-name {
+            font-weight: 700;
+            color: #1a3a8f;
+            font-size: 1rem;
+        }
+        
+        .bank-detail {
+            color: #555;
+            font-size: 0.85rem;
+        }
+        
+        .copy-bank-btn {
+            background: linear-gradient(to right, #0c7b3a, #0a9e4a);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .alert-message {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 12px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #e65100;
+        }
+        
+        .alert-message i {
+            font-size: 1.2rem;
+        }
+        
+        .btn-whatsapp-envio {
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-whatsapp-envio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
         }
         
         .btn-bcv {
             background: linear-gradient(to right, #0c1b5a, #1a3a8f);
             color: white;
             border: none;
-            padding: 16px 25px;
-            font-size: 1.1rem;
+            padding: 14px 20px;
+            font-size: 1rem;
             font-weight: 600;
             border-radius: 12px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(26, 58, 143, 0.3);
-            width: 100%;
-        }
-        
-        .btn-bcv:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(26, 58, 143, 0.4);
-        }
-        
-        .btn-bcv:active {
-            transform: translateY(0);
-        }
-        
-        .btn-bcv:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .calculator-section {
-            background-color: #f1f8ff;
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 25px;
-            border: 2px solid #c2d9ff;
-        }
-        
-        .calculator-title {
-            color: #1a3a8f;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
             gap: 10px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        .input-group label {
-            display: block;
-            color: #333;
-            margin-bottom: 8px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .input-with-icon {
-            position: relative;
-        }
-        
-        .input-with-icon i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #1a3a8f;
-            font-size: 1.2rem;
-        }
-        
-        .input-with-icon input {
             width: 100%;
-            padding: 15px 15px 15px 50px;
-            font-size: 1.1rem;
-            border: 2px solid #c2d9ff;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            background-color: white;
-        }
-        
-        .input-with-icon input:focus {
-            outline: none;
-            border-color: #1a3a8f;
-            box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.2);
-        }
-        
-        .result-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-top: 20px;
-            text-align: center;
-            border: 2px dashed #c2d9ff;
-            position: relative;
-        }
-        
-        .result-container.hidden {
-            display: none;
-        }
-        
-        .result-title {
-            color: #1a3a8f;
-            font-size: 1.1rem;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .dolar-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #0c1b5a;
-            margin: 10px 0;
-        }
-        
-        .conversion-result {
-            margin-top: 25px;
-            padding-top: 25px;
-            border-top: 2px solid #eaeaea;
-        }
-        
-        .conversion-title {
-            color: #555;
-            font-size: 1rem;
-            margin-bottom: 10px;
-        }
-        
-        .conversion-amount {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #1a3a8f;
-            margin: 10px 0;
-            word-break: break-word;
-        }
-        
-        .copy-btn {
-            background: linear-gradient(to right, #0c7b3a, #0a9e4a);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-        }
-        
-        .copy-btn:hover {
-            background: linear-gradient(to right, #0a9e4a, #0c7b3a);
-            transform: translateY(-2px);
-        }
-        
-        .copy-btn.copied {
-            background: linear-gradient(to right, #0c1b5a, #1a3a8f);
-        }
-        
-        .copy-btn.copied i {
-            animation: bounce 0.5s;
-        }
-        
-        .unit {
-            font-size: 1rem;
-            color: #666;
-            font-weight: normal;
-        }
-        
-        .update-info {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .decimal-info {
-            color: #888;
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .copy-info {
-            color: #666;
-            font-size: 0.8rem;
-            margin-top: 5px;
-            font-style: italic;
-        }
-        
-        .bcv-preview {
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            border: 1px solid #ddd;
-            font-family: monospace;
-            font-size: 1.1rem;
-            text-align: center;
-            color: #333;
-        }
-        
-        .highlight {
-            color: #1a3a8f;
-            font-weight: bold;
-            background-color: #e8f0fe;
-            padding: 2px 5px;
-            border-radius: 4px;
         }
         
         .exchange-rate {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            color: #666;
-            font-size: 0.95rem;
-        }
-        
-        /* Estilos para el Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal {
-            background-color: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            transform: translateY(30px);
-            transition: transform 0.3s ease;
-        }
-        
-        .modal-overlay.active .modal {
-            transform: translateY(0);
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .modal-header h2 {
-            color: #1a3a8f;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #666;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            color: #1a3a8f;
-        }
-        
-        .instruction-message {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 25px;
             text-align: center;
-            font-weight: 600;
-            border-left: 5px solid #4caf50;
-        }
-        
-        .payment-data {
-            margin-bottom: 30px;
-        }
-        
-        .data-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #1a3a8f;
-        }
-        
-        .data-label {
-            font-weight: 600;
-            color: #333;
-            font-size: 1.1rem;
-        }
-        
-        .data-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1a3a8f;
-        }
-        
-        .copy-data-btn {
-            background: linear-gradient(to right, #0c7b3a, #0a9e4a);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            margin-left: 10px;
-        }
-        
-        .copy-data-btn:hover {
-            background: linear-gradient(to right, #0a9e4a, #0c7b3a);
-            transform: translateY(-2px);
-        }
-        
-        .copy-data-btn.copied {
-            background: linear-gradient(to right, #0c1b5a, #1a3a8f);
-        }
-        
-        .modal-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-        
-        .modal-footer p {
+            margin: 10px 0;
             color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        
-        .loader {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .loader.active {
-            display: flex;
-        }
-        
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(26, 58, 143, 0.2);
-            border-top: 4px solid #1a3a8f;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        .loader p {
-            color: #1a3a8f;
-            font-weight: 500;
-        }
-        
-        .error-message {
-            color: #d32f2f;
-            background-color: #ffebee;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: none;
-        }
-        
-        .error-message.active {
-            display: block;
+            font-size: 0.85rem;
         }
         
         .footer {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             color: #666;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             border-top: 1px solid #eee;
         }
         
-        .instructions {
-            margin-top: 25px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 15px;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        
-        .instructions h4 {
-            color: #1a3a8f;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        /* Ventana emergente de agradecimiento */
-        .popup-overlay {
+        .toast-message {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .popup {
-            background-color: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            padding: 40px 30px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            transform: translateY(30px) scale(0.9);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .popup-overlay.active .popup {
-            transform: translateY(0) scale(1);
-        }
-        
-        .popup-icon {
-            font-size: 4rem;
-            color: #4caf50;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .popup-title {
-            color: #1a3a8f;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-        
-        .popup-message {
-            color: #333;
-            font-size: 1.2rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-        
-        .popup-close-btn {
-            background: linear-gradient(to right, #0c1b5a, #1a3a8f);
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4caf50;
             color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: 600;
+            padding: 12px 20px;
             border-radius: 8px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            text-align: center;
+            max-width: 90%;
         }
         
-        .popup-close-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(26, 58, 143, 0.3);
+        .toast-message.warning {
+            background-color: #ff9800;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        .toast-message.show {
+            opacity: 1;
         }
         
         @keyframes pulse {
@@ -683,507 +393,342 @@
             100% { transform: scale(1); }
         }
         
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 15px;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .main-action-title {
-                font-size: 1.4rem;
-            }
-            
-            .btn-panax-main {
-                font-size: 1.2rem;
-                padding: 16px 25px;
-            }
-            
-            .dolar-value {
-                font-size: 1.8rem;
-            }
-            
-            .conversion-amount {
-                font-size: 2.2rem;
-            }
-            
-            .modal {
-                padding: 20px;
-                width: 95%;
-            }
-            
-            .data-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .copy-data-btn {
-                align-self: flex-end;
-            }
-            
-            .popup {
-                padding: 30px 20px;
-            }
-            
-            .popup-icon {
-                font-size: 3rem;
-            }
-            
-            .popup-title {
-                font-size: 1.5rem;
-            }
-            
-            .popup-message {
-                font-size: 1rem;
-            }
+        @media (max-width: 550px) {
+            .content { padding: 15px; }
+            .payment-amount { font-size: 1.5rem; }
+            .bank-item { flex-direction: column; align-items: flex-start; }
+            .copy-bank-btn { align-self: flex-end; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-motorcycle"></i> Mototaxis Simón Bolívar</h1>
-            <p>Sistema de Pago Móvil - Calculadora Dólar BCV</p>
+            <img class="header-image" src="https://i.pinimg.com/736x/c0/3e/ed/c03eeddad09b91f76dd63ae373d0d27e.jpg" alt="Panaxstreaming TV Go">
+            <h1><i class="fas fa-tv"></i> DATOS PARA CONCRETAR SU COMPRA DE SERVICIOS EN PANAXTREAMING TV GO</h1>
+            <div class="subtitle">
+                <i class="fas fa-dollar-sign"></i> 💰 Verifique el precio actual del dólar y realice su pago
+            </div>
         </div>
         
         <div class="content">
-            <!-- BOTÓN PRINCIPAL: COMPRAS PANAXSTREAMING (lo primero que aparece) -->
             <div class="main-action-section">
-                <div class="main-action-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
+                <div class="main-action-icon"><i class="fas fa-shopping-cart"></i></div>
                 <div class="main-action-title">¡Realiza tu Pago!</div>
-                <div class="main-action-subtitle">Haz clic aquí para completar tu transacción</div>
-                <a href="https://vendeygana2.github.io/PAGOMOVILMOTOTAXIS/" target="_blank" class="btn-panax-main" id="btnPanaxMain">
-                    <i class="fas fa-credit-card"></i>
-                    <span>Compras Panaxstreaming</span>
-                    <i class="fas fa-arrow-right"></i>
+                <a href="https://vendeygana2.github.io/PAGOMOVILMOTOTAXIS/" target="_blank" class="btn-panax-main">
+                    <i class="fas fa-credit-card"></i> Compras Panaxstreaming <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
             
             <div class="info-box">
                 <h3><i class="fas fa-search"></i> Valor del Dólar BCV</h3>
-                <p>Este botón obtiene el tipo de cambio oficial del dólar estadounidense (USD) publicado por el Banco Central de Venezuela en tiempo real.</p>
-                <div class="bcv-preview">
-                    <span style="color: #666;">Tipo de cambio según BCV:</span><br>
-                    <span style="font-size: 1.3rem; margin-top: 5px; display: block;">
-                        1 USD = <span id="previewValue" class="highlight">Bs. 251,88670000</span>
-                    </span>
+                <p>1 USD = <strong id="dolarRate">Bs. 251,88670000</strong></p>
+                <button class="btn-bcv" id="btnBCV"><i class="fas fa-sync-alt"></i> Actualizar Valor del Dólar BCV</button>
+                <div class="exchange-rate" id="updateTime">Tasa actualizada: Hoy</div>
+            </div>
+            
+            <!-- SELECCIÓN DE PLAN -->
+            <div class="plans-section">
+                <div class="plans-title"><i class="fas fa-list-dropdown"></i> 📋 SELECCIONA TU PLAN</div>
+                <select class="plan-select" id="planSelect">
+                    <option value="">-- Seleccione un plan --</option>
+                    <option value="3.00">📺 1 MES PANTALLA VIP (+$3.00)</option>
+                    <option value="6.00">📺 1 MES DOS PANTALLAS (+$6.00)</option>
+                    <option value="6.00">📺 2 MESES PANTALLA VIP (+$6.00)</option>
+                    <option value="9.00">📺 3 MESES PANTALLA VIP (+$9.00)</option>
+                    <option value="15.00">📺 6 MESES (+$15.00)</option>
+                    <option value="29.00">📺 12 MESES (+$29.00)</option>
+                    <option value="3.50">📺 1 MES FLUJO TV PANTALLA (+$3.50)</option>
+                    <option value="5.50">📺 1 MES FLUJO CUENTA COMPLETA 3 DISPOSITIVOS (+$5.50)</option>
+                    <option value="5.50">📺 COMBO PANTALLAS PANAXTREAMING + FLUJO TV (+$5.50)</option>
+                    <option value="4.50">📺 1 MES STELLA TV PANTALLA (+$4.50)</option>
+                    <option value="11.50">📺 1 MES STELLA CUENTA COMPLETA 3 DISPOSITIVOS (+$11.50)</option>
+                </select>
+                <div style="margin-top: 12px; text-align: center; font-size: 0.85rem; color: #1a3a8f;" id="selectedPlanText">Plan seleccionado: Ninguno</div>
+            </div>
+            
+            <!-- DATOS DEL CLIENTE -->
+            <div class="client-form-section">
+                <div class="client-form-title"><i class="fas fa-user-check"></i> LISTO PARA HACER PAGO · DATOS VERIFICADOS</div>
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Nombre y Apellido:</label>
+                    <input type="text" id="nombreCliente" placeholder="Ej: Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Teléfono de contacto:</label>
+                    <input type="tel" id="telefonoCliente" placeholder="0412-1234567">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Correo electrónico:</label>
+                    <input type="email" id="emailCliente" placeholder="ejemplo@correo.com">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-id-card"></i> Cédula:</label>
+                    <input type="text" id="cedulaCliente" placeholder="V-12345678">
                 </div>
             </div>
             
-            <div class="btn-container">
-                <button class="btn-bcv" id="btnBCV">
-                    <i class="fas fa-sync-alt"></i>
-                    <span>Obtener Valor Actual del Dólar BCV</span>
-                </button>
+            <!-- MONTO A PAGAR EN BS -->
+            <div class="payment-summary">
+                <div class="payment-summary-title"><i class="fas fa-money-bill-wave"></i> MONTO A PAGAR EN BOLÍVARES</div>
+                <div class="payment-amount" id="montoPagoBs">Bs. 0,00</div>
+                <button class="copy-amount-btn" id="copyAmountBtn"><i class="far fa-copy"></i> Copiar Monto para pegar en el Banco</button>
             </div>
             
-            <div class="loader" id="loader">
-                <div class="spinner"></div>
-                <p>Conectando con www.bcv.org.ve...</p>
-            </div>
-            
-            <div class="error-message" id="errorMessage">
-                <p><i class="fas fa-exclamation-triangle"></i> <strong>Error de CORS:</strong> No se puede acceder directamente a la página del BCV desde el navegador. Esto es una simulación del valor real.</p>
-            </div>
-            
-            <div class="calculator-section">
-                <div class="calculator-title">
-                    <i class="fas fa-exchange-alt"></i> Calculadora de Conversión
+            <!-- DATOS BANCARIOS - BANCO MERCANTIL - VENEZUELA -->
+            <div class="bank-data-section">
+                <div class="bank-title">🏦 BANCO MERCANTIL - VENEZUELA</div>
+                
+                <!-- Teléfono -->
+                <div class="bank-item">
+                    <div class="bank-info">
+                        <div class="bank-name">📱 TELÉFONO</div>
+                        <div class="bank-detail">0412-0754787</div>
+                    </div>
+                    <button class="copy-bank-btn copy-telefono" id="copyTelefonoBtn"><i class="far fa-copy"></i> Copiar Teléfono</button>
                 </div>
                 
-                <div class="input-group">
-                    <label for="dollarAmount">
-                        <i class="fas fa-dollar-sign"></i> Monto a pagar en dólares (USD)
-                    </label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-money-bill-wave"></i>
-                        <input 
-                            type="number" 
-                            id="dollarAmount" 
-                            placeholder="Ej: 100, 50.5, 25.75"
-                            step="0.01"
-                            min="0"
-                            value="100"
-                        >
+                <!-- Cédula -->
+                <div class="bank-item">
+                    <div class="bank-info">
+                        <div class="bank-name">🆔 CÉDULA</div>
+                        <div class="bank-detail">13.967.475</div>
                     </div>
-                    <div class="exchange-rate" id="exchangeRateDisplay">
-                        <span>Tipo de cambio: </span>
-                        <span id="currentRate">Bs. 251,88670000</span>
-                        <span> por 1 USD</span>
-                    </div>
-                </div>
-                
-                <div class="result-container" id="resultContainer">
-                    <div class="result-title">
-                        <i class="fas fa-chart-line"></i> Tipo de Cambio Oficial BCV
-                    </div>
-                    <div class="dolar-value" id="dolarValue">Bs. 251,88670000</div>
-                    <div class="update-info">
-                        <i class="far fa-clock"></i>
-                        <span id="updateTime">Valor de referencia según BCV.org.ve</span>
-                    </div>
-                    
-                    <div class="conversion-result" id="conversionResult">
-                        <div class="conversion-title">
-                            <i class="fas fa-calculator"></i> Su pago es de:
-                        </div>
-                        <div class="conversion-amount" id="conversionAmount">
-                            Bs. 25.188,67
-                        </div>
-                        <div class="decimal-info">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Monto mostrado con 2 decimales para transacciones</span>
-                        </div>
-                        <button class="copy-btn" id="copyBtn">
-                            <i class="far fa-copy"></i> Copiar Monto a Pagar
-                        </button>
-                        <div class="copy-info">
-                            <i class="fas fa-clipboard"></i>
-                            <span>Se copiará el monto y se mostrarán los datos de pago móvil</span>
-                        </div>
-                        <div class="update-info" style="margin-top: 15px;">
-                            <i class="fas fa-calculator"></i>
-                            <span>El valor se calcula automáticamente al ingresar el monto en USD</span>
-                        </div>
-                    </div>
+                    <button class="copy-bank-btn copy-cedula" id="copyCedulaBtn"><i class="far fa-copy"></i> Copiar Cédula</button>
                 </div>
             </div>
             
-            <div class="instructions">
-                <h4><i class="fas fa-lightbulb"></i> Cómo usar:</h4>
-                <ol style="margin-left: 20px; margin-top: 8px;">
-                    <li>Presiona el botón <strong>"Compras Panaxstreaming"</strong> para ir a la página de pago móvil</li>
-                    <li>Obtén el valor actual del dólar BCV haciendo clic en el botón azul</li>
-                    <li>Ingresa el monto en dólares que deseas convertir</li>
-                    <li>El sistema calculará automáticamente el equivalente en bolívares</li>
-                    <li>Usa el botón verde para copiar el monto y ver los datos de pago móvil</li>
-                </ol>
-                <p style="margin-top: 10px; color: #1a3a8f; font-weight: 500;">
-                    <i class="fas fa-exclamation-circle"></i> Nota: El botón naranja abre la pasarela de pago en una nueva pestaña.
-                </p>
+            <!-- ALERTA: Envíe capture a WhatsApp -->
+            <div class="alert-message" id="alertMensaje" style="display: none;">
+                <i class="fab fa-whatsapp"></i>
+                <span><strong>📱 Envíe el capture de pago a este WhatsApp: +58 416-1379797</strong></span>
             </div>
+            
+            <!-- Botón para enviar comprobante al WhatsApp indicado -->
+            <button class="btn-whatsapp-envio" id="btnEnviarComprobante">
+                <i class="fab fa-whatsapp"></i> Enviar comprobante de pago al WhatsApp +58 416-1379797
+            </button>
         </div>
         
         <div class="footer">
-            <p>Calculadora basada en el tipo de cambio del Banco Central de Venezuela (BCV)</p>
-            <p><i class="fas fa-motorcycle"></i> Mototaxis Simón Bolívar - Pago Móvil Seguro</p>
+            <p><i class="fas fa-tv"></i> Panaxstreaming TV Go - Pago Móvil Seguro</p>
+            <p>Tasa de cambio oficial del BCV</p>
         </div>
     </div>
-
-    <!-- Modal de Datos de Pago Móvil -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2><i class="fas fa-mobile-alt"></i> Datos de Pago Móvil</h2>
-                <button class="close-modal" id="closeModal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="instruction-message" id="instructionMessage">
-                <i class="fas fa-paste"></i>
-                <span>Pegue el monto en su banco para pagar</span>
-            </div>
-            
-            <div class="payment-data">
-                <div class="data-item">
-                    <div class="data-label">Banco:</div>
-                    <div class="data-value">MERCANTIL</div>
-                </div>
-                
-                <div class="data-item">
-                    <div class="data-label">Cédula:</div>
-                    <div class="data-value">13.967.475</div>
-                    <button class="copy-data-btn" id="copyCedulaBtn">
-                        <i class="far fa-copy"></i> Copiar Cédula
-                    </button>
-                </div>
-                
-                <div class="data-item">
-                    <div class="data-label">Teléfono:</div>
-                    <div class="data-value">0412-0754787</div>
-                    <button class="copy-data-btn" id="copyTelefonoBtn">
-                        <i class="far fa-copy"></i> Copiar Teléfono
-                    </button>
-                </div>
-            </div>
-            
-            <div class="modal-footer">
-                <p><i class="fas fa-info-circle"></i> El monto <strong id="modalAmount">Bs. 25.188,67</strong> ya ha sido copiado a su portapapeles</p>
-                <p style="margin-top: 10px; font-size: 0.8rem; color: #888;">
-                    Copie los datos que necesite para completar su pago móvil
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Ventana emergente de agradecimiento -->
-    <div class="popup-overlay" id="thankYouPopup">
-        <div class="popup">
-            <div class="popup-icon">
-                <i class="fas fa-motorcycle"></i>
-            </div>
-            <div class="popup-title">
-                ¡Muchas Gracias!
-            </div>
-            <div class="popup-message">
-                Gracias por usar nuestra línea de mototaxis Simón Bolívar
-            </div>
-            <button class="popup-close-btn" id="closePopupBtn">
-                <i class="fas fa-check"></i> Cerrar
-            </button>
-        </div>
-    </div>
+    
+    <div id="toast" class="toast-message">¡Copiado!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elementos del DOM
+            // Elementos
+            const dolarRateSpan = document.getElementById('dolarRate');
+            const updateTimeSpan = document.getElementById('updateTime');
             const btnBCV = document.getElementById('btnBCV');
-            const loader = document.getElementById('loader');
-            const resultContainer = document.getElementById('resultContainer');
-            const dolarValue = document.getElementById('dolarValue');
-            const updateTime = document.getElementById('updateTime');
-            const errorMessage = document.getElementById('errorMessage');
-            const previewValue = document.getElementById('previewValue');
-            const dollarAmountInput = document.getElementById('dollarAmount');
-            const conversionAmount = document.getElementById('conversionAmount');
-            const copyBtn = document.getElementById('copyBtn');
-            const currentRate = document.getElementById('currentRate');
-            const conversionResult = document.getElementById('conversionResult');
-            const exchangeRateDisplay = document.getElementById('exchangeRateDisplay');
-            const modalAmount = document.getElementById('modalAmount');
+            const planSelect = document.getElementById('planSelect');
+            const selectedPlanText = document.getElementById('selectedPlanText');
+            const montoPagoBs = document.getElementById('montoPagoBs');
+            const copyAmountBtn = document.getElementById('copyAmountBtn');
+            const btnEnviarComprobante = document.getElementById('btnEnviarComprobante');
+            const alertMensaje = document.getElementById('alertMensaje');
             
-            // Elementos del modal
-            const paymentModal = document.getElementById('paymentModal');
-            const closeModalBtn = document.getElementById('closeModal');
-            const copyCedulaBtn = document.getElementById('copyCedulaBtn');
+            // Campos cliente
+            const nombreCliente = document.getElementById('nombreCliente');
+            const telefonoCliente = document.getElementById('telefonoCliente');
+            const emailCliente = document.getElementById('emailCliente');
+            const cedulaCliente = document.getElementById('cedulaCliente');
+            
+            // Botones copiar
             const copyTelefonoBtn = document.getElementById('copyTelefonoBtn');
-            const instructionMessage = document.getElementById('instructionMessage');
+            const copyCedulaBtn = document.getElementById('copyCedulaBtn');
             
-            // Elementos del popup de agradecimiento
-            const thankYouPopup = document.getElementById('thankYouPopup');
-            const closePopupBtn = document.getElementById('closePopupBtn');
+            // Variables
+            const REAL_DOLAR_BCV = "251.88670000";
+            let currentDollarRate = 251.8867;
+            let currentPlanUSD = 0;
+            let currentPlanName = "";
+            let currentMontoBs = 0;
             
-            // Valor REAL del dólar según la imagen proporcionada
-            const REAL_DOLAR_BCV = "251,88670000";
-            let currentDollarRate = REAL_DOLAR_BCV;
-            let hasFetched = false;
-            let currentCalculatedAmount = 0;
-            
-            // Función para formatear la fecha y hora actual
-            function getCurrentDateTime() {
-                const now = new Date();
-                const options = { 
-                    day: '2-digit', 
-                    month: '2-digit', 
-                    year: 'numeric',
-                    hour: '2-digit', 
-                    minute: '2-digit',
-                    second: '2-digit'
-                };
-                return now.toLocaleDateString('es-VE', options);
+            // Toast
+            function showToast(message, isWarning = false) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message || '¡Copiado!';
+                toast.classList.remove('warning');
+                if (isWarning) toast.classList.add('warning');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
             }
             
-            // Función para convertir formato de número (251,88670000 -> 251.8867)
-            function parseNumber(str) {
-                return parseFloat(str.replace(',', '.'));
+            // Mostrar alerta de WhatsApp
+            function mostrarAlertaWhatsApp() {
+                alertMensaje.style.display = 'flex';
+                showToast("📱 Recuerde enviar el capture de pago al WhatsApp +58 416-1379797", false);
+                setTimeout(() => {
+                    alertMensaje.style.display = 'none';
+                }, 8000);
             }
             
-            // Función para formatear número con separadores de miles y 2 decimales (para mostrar)
+            // Formatear números
             function formatNumberWithTwoDecimals(num) {
-                const rounded = Math.round(num * 100) / 100;
-                return rounded.toLocaleString('es-VE', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
+                return num.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
             
-            // Función para obtener el número limpio (sin separadores de miles, con coma decimal)
+            function formatNumberWithSixDecimals(num) {
+                return num.toLocaleString('es-VE', { minimumFractionDigits: 6, maximumFractionDigits: 6 });
+            }
+            
             function getCleanNumber(num) {
-                const rounded = Math.round(num * 100) / 100;
-                const withDot = rounded.toFixed(2);
-                return withDot.replace('.', ',');
+                return num.toFixed(2).replace('.', ',');
             }
             
-            // Función para calcular la conversión
-            function calculateConversion() {
-                const dollarAmount = parseFloat(dollarAmountInput.value) || 0;
-                const rate = parseNumber(currentDollarRate);
-                const result = dollarAmount * rate;
-                
-                currentCalculatedAmount = result;
-                
-                const formattedAmount = formatNumberWithTwoDecimals(result);
-                conversionAmount.textContent = `Bs. ${formattedAmount}`;
-                modalAmount.textContent = `Bs. ${formattedAmount}`;
-                currentRate.textContent = `Bs. ${currentDollarRate}`;
-                
-                if (!resultContainer.classList.contains('hidden')) {
-                    conversionResult.style.display = 'block';
+            // Actualizar monto según plan y tasa
+            function updateMonto() {
+                if (currentPlanUSD > 0) {
+                    currentMontoBs = currentPlanUSD * currentDollarRate;
+                    montoPagoBs.textContent = `Bs. ${formatNumberWithTwoDecimals(currentMontoBs)}`;
+                } else {
+                    currentMontoBs = 0;
+                    montoPagoBs.textContent = `Bs. 0,00`;
                 }
             }
             
-            // Función para simular la obtención del valor REAL del BCV
-            async function getRealDollarRate() {
-                await new Promise(resolve => setTimeout(resolve, 1800));
-                return currentDollarRate;
-            }
-            
-            // Función para mostrar el resultado
-            function showResult(rate) {
-                currentDollarRate = rate;
-                dolarValue.textContent = `Bs. ${rate}`;
-                updateTime.textContent = `Última actualización: ${getCurrentDateTime()}`;
-                resultContainer.classList.remove('hidden');
-                previewValue.textContent = `Bs. ${rate}`;
-                calculateConversion();
-            }
-            
-            // Función principal para consultar el dólar
-            async function consultarDolarBCV() {
-                btnBCV.disabled = true;
-                btnBCV.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Conectando al BCV...</span>';
-                loader.classList.add('active');
-                errorMessage.classList.remove('active');
-                
-                try {
-                    const rate = await getRealDollarRate();
-                    showResult(rate);
-                    hasFetched = true;
-                    btnBCV.innerHTML = '<i class="fas fa-sync-alt"></i><span>Actualizar Valor BCV</span>';
-                } catch (error) {
-                    console.error('Error:', error);
-                    errorMessage.classList.add('active');
-                    if (!hasFetched) {
-                        showResult(currentDollarRate);
-                    }
-                    btnBCV.innerHTML = '<i class="fas fa-sync-alt"></i><span>Reintentar Conexión</span>';
-                } finally {
-                    btnBCV.disabled = false;
-                    loader.classList.remove('active');
-                }
-            }
-            
-            // Función para copiar al portapapeles
-            function copyToClipboard(text) {
+            // Copiar al portapapeles
+            function copyToClipboard(text, mostrarAviso = false) {
                 const textArea = document.createElement('textarea');
                 textArea.value = text;
                 document.body.appendChild(textArea);
                 textArea.select();
-                let success = false;
-                try {
-                    success = document.execCommand('copy');
-                } catch (err) {
-                    console.error('Error al copiar: ', err);
-                }
+                document.execCommand('copy');
                 document.body.removeChild(textArea);
-                return success;
-            }
-            
-            // Función para mostrar el popup de agradecimiento
-            function showThankYouPopup() {
-                thankYouPopup.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            function closeThankYouPopup() {
-                thankYouPopup.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-            
-            function openPaymentModal() {
-                paymentModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            function closePaymentModal() {
-                paymentModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-            
-            // Función para copiar el monto y abrir el modal
-            function copyAmountAndOpenModal() {
-                const cleanAmount = getCleanNumber(currentCalculatedAmount);
-                const copied = copyToClipboard(cleanAmount);
                 
-                if (copied) {
-                    const originalText = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Monto Copiado';
-                    copyBtn.classList.add('copied');
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalText;
-                        copyBtn.classList.remove('copied');
-                    }, 2000);
-                    
-                    instructionMessage.innerHTML = `
-                        <i class="fas fa-paste"></i>
-                        <span>Pegue el monto <strong>${cleanAmount}</strong> en su banco para pagar</span>
-                    `;
-                    openPaymentModal();
+                if (mostrarAviso) {
+                    mostrarAlertaWhatsApp();
+                }
+                return true;
+            }
+            
+            // Cuando selecciona un plan
+            planSelect.addEventListener('change', function() {
+                const value = parseFloat(planSelect.value);
+                const text = planSelect.options[planSelect.selectedIndex]?.text || "";
+                
+                if (!isNaN(value) && value > 0) {
+                    currentPlanUSD = value;
+                    currentPlanName = text;
+                    selectedPlanText.innerHTML = `Plan seleccionado: ${text}`;
+                    updateMonto();
                 } else {
-                    alert("No se pudo copiar el monto automáticamente. Por favor, cópielo manualmente.");
-                    openPaymentModal();
+                    currentPlanUSD = 0;
+                    currentPlanName = "";
+                    selectedPlanText.innerHTML = "Plan seleccionado: Ninguno";
+                    updateMonto();
+                }
+            });
+            
+            // Copiar monto
+            copyAmountBtn.addEventListener('click', function() {
+                if (currentMontoBs > 0) {
+                    const montoClean = getCleanNumber(currentMontoBs);
+                    copyToClipboard(montoClean, false);
+                    showToast(`💰 Monto Bs. ${montoClean} copiado - Pegue en su banco`);
+                } else {
+                    showToast("⚠️ Seleccione un plan primero", true);
+                }
+            });
+            
+            // Copiar teléfono - Al copiar muestra alerta
+            copyTelefonoBtn.addEventListener('click', function() {
+                copyToClipboard("04120754787", true);
+                showToast("📱 Teléfono 0412-0754787 copiado");
+            });
+            
+            // Copiar cédula - Al copiar muestra alerta
+            copyCedulaBtn.addEventListener('click', function() {
+                copyToClipboard("13967475", true);
+                showToast("🆔 Cédula 13.967.475 copiada");
+            });
+            
+            // Obtener fecha actual
+            function getCurrentDateTime() {
+                const now = new Date();
+                return now.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            }
+            
+            // Actualizar tasa BCV
+            async function actualizarTasaBCV() {
+                btnBCV.disabled = true;
+                btnBCV.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando al BCV...';
+                
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    currentDollarRate = 251.8867;
+                    const formattedRate = formatNumberWithSixDecimals(currentDollarRate);
+                    dolarRateSpan.textContent = `Bs. ${formattedRate}`;
+                    updateTimeSpan.innerHTML = `Tasa actualizada: ${getCurrentDateTime()}`;
+                    updateMonto();
+                    btnBCV.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar Valor del Dólar BCV';
+                } catch (error) {
+                    btnBCV.innerHTML = '<i class="fas fa-sync-alt"></i> Reintentar';
+                } finally {
+                    btnBCV.disabled = false;
                 }
             }
             
-            // Eventos
-            btnBCV.addEventListener('click', consultarDolarBCV);
-            dollarAmountInput.addEventListener('input', calculateConversion);
-            dollarAmountInput.addEventListener('change', function() {
-                if (this.value < 0) this.value = 0;
-                calculateConversion();
-            });
-            copyBtn.addEventListener('click', copyAmountAndOpenModal);
-            closeModalBtn.addEventListener('click', closePaymentModal);
-            paymentModal.addEventListener('click', function(e) {
-                if (e.target === paymentModal) closePaymentModal();
-            });
-            closePopupBtn.addEventListener('click', closeThankYouPopup);
-            thankYouPopup.addEventListener('click', function(e) {
-                if (e.target === thankYouPopup) closeThankYouPopup();
-            });
-            
-            copyCedulaBtn.addEventListener('click', function() {
-                const cedulaText = "13967475";
-                const copied = copyToClipboard(cedulaText);
-                if (copied) {
-                    const originalText = copyCedulaBtn.innerHTML;
-                    copyCedulaBtn.innerHTML = '<i class="fas fa-check"></i> Copiado';
-                    copyCedulaBtn.classList.add('copied');
-                    setTimeout(() => {
-                        copyCedulaBtn.innerHTML = originalText;
-                        copyCedulaBtn.classList.remove('copied');
-                    }, 2000);
+            // Enviar comprobante por WhatsApp al número +58 416-1379797
+            function enviarComprobante() {
+                if (currentPlanUSD === 0) {
+                    showToast("⚠️ Por favor, seleccione un plan primero", true);
+                    return;
                 }
-            });
+                
+                const nombre = nombreCliente.value.trim();
+                const telefono = telefonoCliente.value.trim();
+                const email = emailCliente.value.trim();
+                const cedula = cedulaCliente.value.trim();
+                
+                if (!nombre) { showToast("⚠️ Ingrese su nombre", true); nombreCliente.focus(); return; }
+                if (!telefono) { showToast("⚠️ Ingrese su teléfono", true); telefonoCliente.focus(); return; }
+                if (!email) { showToast("⚠️ Ingrese su correo", true); emailCliente.focus(); return; }
+                if (!cedula) { showToast("⚠️ Ingrese su cédula", true); cedulaCliente.focus(); return; }
+                
+                const montoUSDLimpio = currentPlanUSD.toFixed(2);
+                const montoBsFormateado = formatNumberWithTwoDecimals(currentMontoBs);
+                const tasaFormateada = formatNumberWithSixDecimals(currentDollarRate);
+                const fecha = getCurrentDateTime();
+                
+                const mensaje = `*📺 COMPROBANTE DE PAGO - PANAXTREAMING TV GO*%0a%0a` +
+                    `*🧑 DATOS DEL CLIENTE:*%0a` +
+                    `Nombre: ${encodeURIComponent(nombre)}%0a` +
+                    `Teléfono: ${encodeURIComponent(telefono)}%0a` +
+                    `Correo: ${encodeURIComponent(email)}%0a` +
+                    `Cédula: ${encodeURIComponent(cedula)}%0a%0a` +
+                    `*🎯 PLAN CONTRATADO:*%0a` +
+                    `${encodeURIComponent(currentPlanName)}%0a%0a` +
+                    `*💰 DETALLES DEL PAGO:*%0a` +
+                    `Monto en USD: $${montoUSDLimpio}%0a` +
+                    `Tasa BCV del día: Bs. ${tasaFormateada}%0a` +
+                    `Total pagado en Bolívares: Bs. ${montoBsFormateado}%0a%0a` +
+                    `*🏦 DATOS DEL BANCO (MERCANTIL - VENEZUELA):*%0a` +
+                    `Teléfono: 0412-0754787%0a` +
+                    `Cédula: 13.967.475%0a%0a` +
+                    `*✅ COMPROBANTE ENVIADO*%0a` +
+                    `Fecha: ${encodeURIComponent(fecha)}%0a` +
+                    `_Gracias por confiar en Panaxstreaming TV Go_`;
+                
+                const numeroWhatsApp = "584161379797";
+                const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+                window.open(url, '_blank');
+            }
             
-            copyTelefonoBtn.addEventListener('click', function() {
-                const telefonoText = "04120754787";
-                const copied = copyToClipboard(telefonoText);
-                if (copied) {
-                    const originalText = copyTelefonoBtn.innerHTML;
-                    copyTelefonoBtn.innerHTML = '<i class="fas fa-check"></i> Copiado';
-                    copyTelefonoBtn.classList.add('copied');
-                    setTimeout(() => {
-                        copyTelefonoBtn.innerHTML = originalText;
-                        copyTelefonoBtn.classList.remove('copied');
-                    }, 2000);
-                    setTimeout(() => {
-                        showThankYouPopup();
-                    }, 300);
-                }
-            });
+            btnBCV.addEventListener('click', actualizarTasaBCV);
+            btnEnviarComprobante.addEventListener('click', enviarComprobante);
             
-            // Inicialización
-            previewValue.textContent = `Bs. ${REAL_DOLAR_BCV}`;
-            currentRate.textContent = `Bs. ${REAL_DOLAR_BCV}`;
-            calculateConversion();
-            showResult(REAL_DOLAR_BCV);
+            // Inicializar
+            dolarRateSpan.textContent = `Bs. ${formatNumberWithSixDecimals(251.8867)}`;
+            updateTimeSpan.innerHTML = `Tasa actualizada: ${getCurrentDateTime()}`;
+            currentDollarRate = 251.8867;
+            
+            planSelect.value = "3.00";
+            planSelect.dispatchEvent(new Event('change'));
         });
     </script>
 </body>
