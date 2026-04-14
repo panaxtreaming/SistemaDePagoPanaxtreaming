@@ -20,6 +20,7 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #0c1b5a 0%, #1a3a8f 100%);
             padding: 20px;
+            overflow-x: hidden;
         }
         
         .container {
@@ -72,45 +73,82 @@
             padding: 20px;
         }
         
-        .main-action-section {
+        /* Modal emergente */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .popup-modal {
             background: linear-gradient(135deg, #fff9e6, #fff0d4);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 30px;
             text-align: center;
-            border: 2px solid #f39c12;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            border: 3px solid #f39c12;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         
-        .main-action-icon {
-            font-size: 3rem;
+        .popup-icon {
+            font-size: 5rem;
             color: #e67e22;
-            margin-bottom: 10px;
-            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
         }
         
-        .main-action-title {
-            font-size: 1.5rem;
+        .popup-title {
+            font-size: 2rem;
             font-weight: 800;
             color: #e67e22;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
         }
         
-        .btn-panax-main {
+        .popup-subtitle {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .btn-popup {
             background: linear-gradient(to right, #e67e22, #f39c12);
             color: white;
             border: none;
-            padding: 14px 25px;
-            font-size: 1.2rem;
+            padding: 18px 40px;
+            font-size: 1.3rem;
             font-weight: 700;
-            border-radius: 50px;
+            border-radius: 60px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.5);
             width: 100%;
-            max-width: 280px;
-            text-decoration: none;
+        }
+        
+        .btn-popup:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(230, 126, 34, 0.6);
         }
         
         .info-box {
@@ -270,11 +308,6 @@
             font-size: 1rem;
         }
         
-        .bank-detail {
-            color: #555;
-            font-size: 0.85rem;
-        }
-        
         .copy-bank-btn {
             background: linear-gradient(to right, #0c7b3a, #0a9e4a);
             color: white;
@@ -300,10 +333,6 @@
             gap: 10px;
             font-size: 0.85rem;
             color: #e65100;
-        }
-        
-        .alert-message i {
-            font-size: 1.2rem;
         }
         
         .btn-whatsapp-envio {
@@ -389,7 +418,7 @@
         
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
         
@@ -402,7 +431,22 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- MODAL EMERGENTE - PRIMERO QUE APARECE -->
+    <div class="modal-overlay" id="modalEmergente">
+        <div class="popup-modal">
+            <div class="popup-icon">
+                <i class="fas fa-motorcycle"></i>
+            </div>
+            <div class="popup-title">¡REALIZA TU PAGO!</div>
+            <div class="popup-subtitle">Haz clic aquí para comenzar con tu transacción</div>
+            <button class="btn-popup" id="btnCerrarModal">
+                <i class="fas fa-credit-card"></i> Comenzar Pago
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="container" id="contenidoPrincipal" style="display: none;">
         <div class="header">
             <img class="header-image" src="https://i.pinimg.com/736x/c0/3e/ed/c03eeddad09b91f76dd63ae373d0d27e.jpg" alt="Panaxstreaming TV Go">
             <h1><i class="fas fa-tv"></i> DATOS PARA CONCRETAR SU COMPRA DE SERVICIOS EN PANAXTREAMING TV GO</h1>
@@ -412,22 +456,15 @@
         </div>
         
         <div class="content">
-            <div class="main-action-section">
-                <div class="main-action-icon"><i class="fas fa-shopping-cart"></i></div>
-                <div class="main-action-title">¡Realiza tu Pago!</div>
-                <a href="https://vendeygana2.github.io/PAGOMOVILMOTOTAXIS/" target="_blank" class="btn-panax-main">
-                    <i class="fas fa-credit-card"></i> Compras Panaxstreaming <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
+            <!-- 1. VALOR DEL DÓLAR BCV TASA DEL DÍA -->
             <div class="info-box">
-                <h3><i class="fas fa-search"></i> Valor del Dólar BCV</h3>
-                <p>1 USD = <strong id="dolarRate">Bs. 251,88670000</strong></p>
+                <h3><i class="fas fa-search"></i> 💲 TASA DEL DÍA - DÓLAR BCV</h3>
+                <p style="font-size: 1.5rem; font-weight: 700; color: #1a3a8f;">1 USD = <strong id="dolarRate">Bs. 251,88670000</strong></p>
                 <button class="btn-bcv" id="btnBCV"><i class="fas fa-sync-alt"></i> Actualizar Valor del Dólar BCV</button>
                 <div class="exchange-rate" id="updateTime">Tasa actualizada: Hoy</div>
             </div>
             
-            <!-- SELECCIÓN DE PLAN -->
+            <!-- 2. SELECCIONA TU PLAN -->
             <div class="plans-section">
                 <div class="plans-title"><i class="fas fa-list-dropdown"></i> 📋 SELECCIONA TU PLAN</div>
                 <select class="plan-select" id="planSelect">
@@ -447,7 +484,7 @@
                 <div style="margin-top: 12px; text-align: center; font-size: 0.85rem; color: #1a3a8f;" id="selectedPlanText">Plan seleccionado: Ninguno</div>
             </div>
             
-            <!-- DATOS DEL CLIENTE -->
+            <!-- 3. LISTO PARA HACER PAGO - DATOS VERIFICADOS -->
             <div class="client-form-section">
                 <div class="client-form-title"><i class="fas fa-user-check"></i> LISTO PARA HACER PAGO · DATOS VERIFICADOS</div>
                 <div class="form-group">
@@ -468,18 +505,17 @@
                 </div>
             </div>
             
-            <!-- MONTO A PAGAR EN BS -->
+            <!-- 4. MONTO A PAGAR EN BS -->
             <div class="payment-summary">
                 <div class="payment-summary-title"><i class="fas fa-money-bill-wave"></i> MONTO A PAGAR EN BOLÍVARES</div>
                 <div class="payment-amount" id="montoPagoBs">Bs. 0,00</div>
                 <button class="copy-amount-btn" id="copyAmountBtn"><i class="far fa-copy"></i> Copiar Monto para pegar en el Banco</button>
             </div>
             
-            <!-- DATOS BANCARIOS - BANCO MERCANTIL - VENEZUELA -->
+            <!-- 5. BANCO MERCANTIL - VENEZUELA -->
             <div class="bank-data-section">
                 <div class="bank-title">🏦 BANCO MERCANTIL - VENEZUELA</div>
                 
-                <!-- Teléfono -->
                 <div class="bank-item">
                     <div class="bank-info">
                         <div class="bank-name">📱 TELÉFONO</div>
@@ -488,7 +524,6 @@
                     <button class="copy-bank-btn copy-telefono" id="copyTelefonoBtn"><i class="far fa-copy"></i> Copiar Teléfono</button>
                 </div>
                 
-                <!-- Cédula -->
                 <div class="bank-item">
                     <div class="bank-info">
                         <div class="bank-name">🆔 CÉDULA</div>
@@ -498,15 +533,15 @@
                 </div>
             </div>
             
-            <!-- ALERTA: Envíe capture a WhatsApp -->
+            <!-- ALERTA -->
             <div class="alert-message" id="alertMensaje" style="display: none;">
                 <i class="fab fa-whatsapp"></i>
                 <span><strong>📱 Envíe el capture de pago a este WhatsApp: +58 416-1379797</strong></span>
             </div>
             
-            <!-- Botón para enviar comprobante al WhatsApp indicado -->
+            <!-- 6. BOTÓN ENVIAR COMPROBANTE -->
             <button class="btn-whatsapp-envio" id="btnEnviarComprobante">
-                <i class="fab fa-whatsapp"></i> Enviar comprobante de pago al WhatsApp +58 416-1379797
+                <i class="fab fa-whatsapp"></i> Enviar comprobante de pago por WhatsApp
             </button>
         </div>
         
@@ -520,7 +555,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elementos
+            // Elementos del modal
+            const modalEmergente = document.getElementById('modalEmergente');
+            const btnCerrarModal = document.getElementById('btnCerrarModal');
+            const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+            
+            // Elementos principales
             const dolarRateSpan = document.getElementById('dolarRate');
             const updateTimeSpan = document.getElementById('updateTime');
             const btnBCV = document.getElementById('btnBCV');
@@ -547,6 +587,15 @@
             let currentPlanUSD = 0;
             let currentPlanName = "";
             let currentMontoBs = 0;
+            
+            // Cerrar modal y mostrar contenido
+            btnCerrarModal.addEventListener('click', function() {
+                modalEmergente.classList.add('hide');
+                setTimeout(() => {
+                    modalEmergente.style.display = 'none';
+                    contenidoPrincipal.style.display = 'block';
+                }, 300);
+            });
             
             // Toast
             function showToast(message, isWarning = false) {
@@ -580,7 +629,7 @@
                 return num.toFixed(2).replace('.', ',');
             }
             
-            // Actualizar monto según plan y tasa
+            // Actualizar monto
             function updateMonto() {
                 if (currentPlanUSD > 0) {
                     currentMontoBs = currentPlanUSD * currentDollarRate;
@@ -599,18 +648,14 @@
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
-                
-                if (mostrarAviso) {
-                    mostrarAlertaWhatsApp();
-                }
+                if (mostrarAviso) mostrarAlertaWhatsApp();
                 return true;
             }
             
-            // Cuando selecciona un plan
+            // Evento plan
             planSelect.addEventListener('change', function() {
                 const value = parseFloat(planSelect.value);
                 const text = planSelect.options[planSelect.selectedIndex]?.text || "";
-                
                 if (!isNaN(value) && value > 0) {
                     currentPlanUSD = value;
                     currentPlanName = text;
@@ -635,19 +680,19 @@
                 }
             });
             
-            // Copiar teléfono - Al copiar muestra alerta
+            // Copiar teléfono
             copyTelefonoBtn.addEventListener('click', function() {
                 copyToClipboard("04120754787", true);
                 showToast("📱 Teléfono 0412-0754787 copiado");
             });
             
-            // Copiar cédula - Al copiar muestra alerta
+            // Copiar cédula
             copyCedulaBtn.addEventListener('click', function() {
                 copyToClipboard("13967475", true);
                 showToast("🆔 Cédula 13.967.475 copiada");
             });
             
-            // Obtener fecha actual
+            // Fecha actual
             function getCurrentDateTime() {
                 const now = new Date();
                 return now.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
@@ -657,7 +702,6 @@
             async function actualizarTasaBCV() {
                 btnBCV.disabled = true;
                 btnBCV.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando al BCV...';
-                
                 try {
                     await new Promise(resolve => setTimeout(resolve, 1500));
                     currentDollarRate = 251.8867;
@@ -673,18 +717,16 @@
                 }
             }
             
-            // Enviar comprobante por WhatsApp al número +58 416-1379797
+            // Enviar comprobante
             function enviarComprobante() {
                 if (currentPlanUSD === 0) {
                     showToast("⚠️ Por favor, seleccione un plan primero", true);
                     return;
                 }
-                
                 const nombre = nombreCliente.value.trim();
                 const telefono = telefonoCliente.value.trim();
                 const email = emailCliente.value.trim();
                 const cedula = cedulaCliente.value.trim();
-                
                 if (!nombre) { showToast("⚠️ Ingrese su nombre", true); nombreCliente.focus(); return; }
                 if (!telefono) { showToast("⚠️ Ingrese su teléfono", true); telefonoCliente.focus(); return; }
                 if (!email) { showToast("⚠️ Ingrese su correo", true); emailCliente.focus(); return; }
@@ -715,18 +757,16 @@
                     `_Gracias por confiar en Panaxstreaming TV Go_`;
                 
                 const numeroWhatsApp = "584161379797";
-                const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
-                window.open(url, '_blank');
+                window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
             }
             
             btnBCV.addEventListener('click', actualizarTasaBCV);
             btnEnviarComprobante.addEventListener('click', enviarComprobante);
             
-            // Inicializar
+            // Inicializar valores
             dolarRateSpan.textContent = `Bs. ${formatNumberWithSixDecimals(251.8867)}`;
             updateTimeSpan.innerHTML = `Tasa actualizada: ${getCurrentDateTime()}`;
             currentDollarRate = 251.8867;
-            
             planSelect.value = "3.00";
             planSelect.dispatchEvent(new Event('change'));
         });
