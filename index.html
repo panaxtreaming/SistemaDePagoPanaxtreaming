@@ -459,9 +459,9 @@
             <!-- 1. VALOR DEL DÓLAR BCV TASA DEL DÍA -->
             <div class="info-box">
                 <h3><i class="fas fa-search"></i> 💲 TASA DEL DÍA - DÓLAR BCV</h3>
-                <p style="font-size: 1.5rem; font-weight: 700; color: #1a3a8f;">1 USD = <strong id="dolarRate">Bs. 251,88670000</strong></p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: #1a3a8f;">1 USD = <strong id="dolarRate">Bs. --</strong></p>
                 <button class="btn-bcv" id="btnBCV"><i class="fas fa-sync-alt"></i> Actualizar Valor del Dólar BCV</button>
-                <div class="exchange-rate" id="updateTime">Tasa actualizada: Hoy</div>
+                <div class="exchange-rate" id="updateTime">Presione el botón para obtener la tasa oficial del BCV</div>
             </div>
             
             <!-- 2. SELECCIONA TU PLAN -->
@@ -582,8 +582,7 @@
             const copyCedulaBtn = document.getElementById('copyCedulaBtn');
             
             // Variables
-            const REAL_DOLAR_BCV = "251.88670000";
-            let currentDollarRate = 251.8867;
+            let currentDollarRate = null;     // Inicia sin tasa
             let currentPlanUSD = 0;
             let currentPlanName = "";
             let currentMontoBs = 0;
@@ -629,9 +628,9 @@
                 return num.toFixed(2).replace('.', ',');
             }
             
-            // Actualizar monto
+            // Actualizar monto en bolívares según la tasa actual y el plan seleccionado
             function updateMonto() {
-                if (currentPlanUSD > 0) {
+                if (currentPlanUSD > 0 && currentDollarRate !== null && currentDollarRate > 0) {
                     currentMontoBs = currentPlanUSD * currentDollarRate;
                     montoPagoBs.textContent = `Bs. ${formatNumberWithTwoDecimals(currentMontoBs)}`;
                 } else {
@@ -676,7 +675,7 @@
                     copyToClipboard(montoClean, false);
                     showToast(`💰 Monto Bs. ${montoClean} copiado - Pegue en su banco`);
                 } else {
-                    showToast("⚠️ Seleccione un plan primero", true);
+                    showToast("⚠️ Seleccione un plan y asegúrese de tener la tasa del BCV actualizada", true);
                 }
             });
             
@@ -698,21 +697,56 @@
                 return now.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
             }
             
-            // Actualizar tasa BCV
+            // ================== FUNCIÓN REAL DE CONSULTA A LA TASA BCV ==================
             async function actualizarTasaBCV() {
+                // Deshabilitar botón y mostrar mensaje de carga
                 btnBCV.disabled = true;
-                btnBCV.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando al BCV...';
+                const originalText = btnBCV.innerHTML;
+                btnBCV.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Consultando tasa oficial BCV...';
+                
                 try {
-                    await new Promise(resolve => setTimeout(resolve, 1500));
-                    currentDollarRate = 251.8867;
-                    const formattedRate = formatNumberWithSixDecimals(currentDollarRate);
-                    dolarRateSpan.textContent = `Bs. ${formattedRate}`;
-                    updateTimeSpan.innerHTML = `Tasa actualizada: ${getCurrentDateTime()}`;
-                    updateMonto();
-                    btnBCV.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar Valor del Dólar BCV';
+                    // Usamos la API pública de pydolarve.org que entrega la tasa oficial del BCV
+                    // Endpoint: https://pydolarve.org/api/v1/ (respuesta en JSON)
+                    const response = await fetch('https://pydolarve.org/api/v1/', {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    // La estructura de la respuesta contiene un objeto 'bcv' con el precio
+                    // Ejemplo: data.bcv.price (número)
+                    if (data && data.bcv && typeof data.bcv.price === 'number') {
+                        currentDollarRate = data.bcv.price;
+                        
+                        // Mostrar la tasa con 6 decimales (formato del BCV)
+                        const formattedRate = formatNumberWithSixDecimals(currentDollarRate);
+                        dolarRateSpan.textContent = `Bs. ${formattedRate}`;
+                        updateTimeSpan.innerHTML = `✅ Tasa actualizada: ${getCurrentDateTime()} (fuente: BCV)`;
+                        
+                        // Actualizar el monto a pagar si ya hay un plan seleccionado
+                        updateMonto();
+                        
+                        showToast(`💵 Tasa BCV actualizada: 1 USD = Bs. ${formattedRate}`, false);
+                    } else {
+                        throw new Error('La respuesta de la API no contiene la tasa BCV esperada');
+                    }
+                    
                 } catch (error) {
-                    btnBCV.innerHTML = '<i class="fas fa-sync-alt"></i> Reintentar';
+                    console.error('Error al obtener la tasa del BCV:', error);
+                    showToast('⚠️ No se pudo obtener la tasa del BCV. Verifique su conexión e intente de nuevo.', true);
+                    updateTimeSpan.innerHTML = '❌ Error al consultar la tasa. Intente más tarde.';
+                    // Si no hay tasa previa, dejamos el mensaje de error; si ya había tasa, la mantenemos
+                    if (currentDollarRate === null) {
+                        dolarRateSpan.textContent = 'Bs. --';
+                    }
                 } finally {
+                    // Restaurar botón
+                    btnBCV.innerHTML = originalText;
                     btnBCV.disabled = false;
                 }
             }
@@ -721,6 +755,10 @@
             function enviarComprobante() {
                 if (currentPlanUSD === 0) {
                     showToast("⚠️ Por favor, seleccione un plan primero", true);
+                    return;
+                }
+                if (currentDollarRate === null || currentDollarRate <= 0) {
+                    showToast("⚠️ Primero actualice la tasa del BCV usando el botón azul", true);
                     return;
                 }
                 const nombre = nombreCliente.value.trim();
@@ -760,14 +798,20 @@
                 window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
             }
             
+            // Asignar eventos
             btnBCV.addEventListener('click', actualizarTasaBCV);
             btnEnviarComprobante.addEventListener('click', enviarComprobante);
             
-            // Inicializar valores
-            dolarRateSpan.textContent = `Bs. ${formatNumberWithSixDecimals(251.8867)}`;
-            updateTimeSpan.innerHTML = `Tasa actualizada: ${getCurrentDateTime()}`;
-            currentDollarRate = 251.8867;
-            planSelect.value = "3.00";
+            // Inicialización: seleccionar un plan por defecto (opcional) y dejar la tasa sin cargar
+            // Para que el usuario vea que debe presionar el botón de tasa
+            dolarRateSpan.textContent = `Bs. --`;
+            updateTimeSpan.innerHTML = `🔘 Presione "Actualizar Valor del Dólar BCV" para obtener la tasa oficial`;
+            currentDollarRate = null;
+            // Seleccionar primer plan como ejemplo (opcional, pero se puede dejar sin selección)
+            // planSelect.value = "3.00";
+            // planSelect.dispatchEvent(new Event('change'));
+            // Mejor dejarlo sin plan seleccionado para que el usuario elija
+            planSelect.value = "";
             planSelect.dispatchEvent(new Event('change'));
         });
     </script>
